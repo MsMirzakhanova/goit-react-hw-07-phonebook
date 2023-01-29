@@ -3,13 +3,13 @@ import toast, { Toaster } from 'react-hot-toast';
 import { ContactInputForm } from './Phonebook.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-import {addContacts} from "../redux/contacts.slice"
+import {addContacts} from "../redux/thunk"
 
 
-const shortid = require('shortid');
-const inputNameId = shortid.generate();
-const inputNumberId = shortid.generate();
-const buttonId = shortid.generate();
+// const shortid = require('shortid');
+// const inputNameId = shortid.generate();
+// const inputNumberId = shortid.generate();
+// const buttonId = shortid.generate();
 
 export function PhonebookForm () {
   const [name, setName] = useState('');
@@ -22,7 +22,7 @@ export function PhonebookForm () {
    e.preventDefault();
 
     const newContact = {
-      id: shortid.generate(),
+      
       name,
       number,
     };
@@ -63,29 +63,29 @@ export function PhonebookForm () {
  
     return (
   <ContactInputForm autoComplete='off' onSubmit={onAddContacts}>
-<label htmlFor={inputNameId}>Name</label>
+<label >Name</label>
 <input
   type="text"
   name="name"
   value={name}
   onChange={handleChange}
-  id={inputNameId}
+
   pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
   title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
   required
   />
-<label htmlFor={inputNumberId}>Number</label>
+<label >Number</label>
 <input
   type="tel"
   name="number"
   value={number}
   onChange={handleChange}
-  id={inputNumberId}
+
   pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
   title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
   required
 />
-        <button type="submi" id={buttonId}>Add contact</button>
+        <button type="submi" >Add contact</button>
         <Toaster />
       </ContactInputForm>
       
