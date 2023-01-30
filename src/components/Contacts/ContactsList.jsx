@@ -21,17 +21,13 @@ export const ContactsList = () => {
   }, [dispatch]);
 
  
-  const onDeleteContact = (id) => {
-    dispatch(deleteContacts(id));
-    
-  };
  
   return (
   <ul>
     {filteredContacts.map(({ id, name, number }) => (
       <ContactItem key={id}>
         <p>{name}: {number}{' '}</p>
-        <ContactBtn onClick={() => onDeleteContact(id)}>delete</ContactBtn>
+        <ContactBtn onClick={() => dispatch(deleteContacts(id))}>delete</ContactBtn>
       </ContactItem>
     )
     )}

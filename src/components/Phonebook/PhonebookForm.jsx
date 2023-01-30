@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { ContactInputForm } from './Phonebook.styled';
-
+import { getContacts } from "../redux/selectors";
 import { useDispatch, useSelector } from 'react-redux';
 import {addContacts} from "../redux/thunk"
 
@@ -16,7 +16,7 @@ export function PhonebookForm () {
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
 
-  const contacts = useSelector((state) => state.contacts.contacts);
+  const contacts = useSelector(getContacts);
 
   const onAddContacts = e => {
    e.preventDefault();

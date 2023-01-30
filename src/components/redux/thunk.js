@@ -15,8 +15,8 @@ export const addContacts = createAsyncThunk('contacts/addContacts', async ({ nam
     return data;
 });
 
-export const deleteContacts = createAsyncThunk('contacts/deleteContacts', async (contactId) => {
-    const { data } = await axios.delete(`/contacts/${contactId}`);
+export const deleteContacts = createAsyncThunk('contacts/deleteContacts', async (id) => {
+    const { data } = await axios.delete(`/contacts/${id}`);
     return data;
 });
 

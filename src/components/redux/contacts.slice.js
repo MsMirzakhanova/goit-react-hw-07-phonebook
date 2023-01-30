@@ -3,7 +3,13 @@ import { contactsInitstate } from "./contactsInitState";
 import { STATUS } from "../constants/status"
 import {contactsAsyncThunk, addContacts, deleteContacts} from "./thunk"
 
-
+const handlePending = state => {
+    state.status = STATUS.loading
+};
+    
+const handleRejected = state => {
+    state.status = STATUS.error
+};
 
 const contactsSlice = createSlice({
     name: "contacts",
@@ -14,37 +20,25 @@ const contactsSlice = createSlice({
         }
     },
     extraReducers: {
-    [contactsAsyncThunk.pending]: (state) => {
-            state.status = STATUS.loading;
-        },
+    [contactsAsyncThunk.pending]: handlePending,
      [contactsAsyncThunk.fulfilled]: (state, {payload}) => {
             state.status = STATUS.success;
             state.contacts = payload;
         },
-    [contactsAsyncThunk.rejected]: (state) => {
-            state.status = STATUS.error;
-        },
-    [addContacts.pending]: (state) => {
-            state.status = STATUS.loading;
-        },
-     [addContacts.fulfilled]: (state, {payload}) => {
+    [contactsAsyncThunk.rejected]: handleRejected,
+    [addContacts.pending]: handlePending,
+    [addContacts.fulfilled]: (state, {payload}) => {
             state.status = STATUS.success;
             state.contacts.push(payload);
         },
-    [addContacts.rejected]: (state) => {
-            state.status = STATUS.error;
-        },
-    [deleteContacts.pending]: (state) => {
-            state.status = STATUS.loading;
-        },
-     [deleteContacts.fulfilled]: (state, {payload}) => {
+    [addContacts.rejected]: handleRejected,
+    [deleteContacts.pending]: handlePending,
+    [deleteContacts.fulfilled]: (state, {payload}) => {
             state.status = STATUS.success;
             state.contacts = state.contacts.filter(
-                (contact) => contact.id !== payload) 
+                (contact) => contact.id !== payload.id) 
         },
-    [deleteContacts.rejected]: (state) => {
-            state.status = STATUS.error;
-        },
+    [deleteContacts.rejected]: handleRejected,
 
     },
 });
