@@ -10,8 +10,8 @@ export const contactsAsyncThunk = createAsyncThunk('contacts', async () => {
     return data;
 });
 
-export const addContacts = createAsyncThunk('contacts/addContacts', async (text) => {
-    const { data } = await axios.post('/contacts', { text });
+export const addContacts = createAsyncThunk('contacts/addContacts', async ({ name, phone}) => {
+    const { data } = await axios.post('/contacts', { name, phone});
     return data;
 });
 
@@ -21,15 +21,3 @@ export const deleteContacts = createAsyncThunk('contacts/deleteContacts', async 
 });
 
 
-// import { contactsLoadingAction, contactsErrorAction, contactsSuccessAction } from "./contacts.slice";
-// import axios from 'axios';
-
-// export const contactsAsyncThunk = async dispatch => {
-//     dispatch(contactsLoadingAction())
-//     try {
-//         const { data } = await axios.get('https://63d3c96b8d4e68c14eb289e8.mockapi.io/contacts');
-//         dispatch(contactsSuccessAction(data))
-//     } catch {
-//         dispatch(contactsErrorAction());
-//     }
-// };
